@@ -104,15 +104,26 @@
   }
 
   // Vanish a mask by posting a current photo and fetching a result.
+  function getCanvasBlob() {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(resolve);
+    })
+  }
 
   function vanishmask() {
-    fetch('success.png')
+    getCanvasBlob()
+      .then(blob => {
+        let formdata = new FormData();
+        formdata.set("picture", blob);
+        return fetch('/upload', { method: "POST", body: formdata })
+      })
       .then(response => response.blob())
       .then(blob => {
-        var img = URL.createObjectURL(blob);
+        let img = URL.createObjectURL(blob);
         // Do whatever with the img
         result.setAttribute('src', img);
       })
+      .catch(e => console.error(e));
   }
 
   // Set up our event listener to run the startup process
