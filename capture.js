@@ -20,6 +20,7 @@
   var result = null;
   var startbutton = null;
   var vanishbutton = null;
+  var guideline = null;
 
   function startup() {
     video = document.getElementById('video');
@@ -28,6 +29,7 @@
     result = document.getElementById('result');
     startbutton = document.getElementById('startbutton');
     vanishbutton = document.getElementById('vanishbutton');
+    guideline = document.getElementById("videoguideline");
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then(function (stream) {
@@ -66,6 +68,8 @@
       vanishmask();
       ev.preventDefault();
     }, false);
+
+    drawGuideline(320, 240);
 
     clearbox(photo);
     clearbox(result);
@@ -124,6 +128,36 @@
         result.setAttribute('src', img);
       })
       .catch(e => console.error(e));
+  }
+
+  let svgns = "http://www.w3.org/2000/svg";
+  function drawGuideline(width, height) {
+    guideline.setAttribute("width", width);
+    guideline.setAttribute("height", height);
+    guideline.appendChild(childLine(0, height/2, width, height/2));
+    guideline.appendChild(childLine(width/2, 0, width/2, height));
+    guideline.appendChild(childEllipse(width/2, height/2, width*2/8, height*3/8));
+  }
+
+  function childLine(x1, y1, x2, y2) {
+    let l = document.createElementNS(svgns, "line");
+    l.setAttributeNS(null, "x1", x1);
+    l.setAttributeNS(null, "y1", y1);
+    l.setAttributeNS(null, "x2", x2);
+    l.setAttributeNS(null, "y2", y2);
+    l.setAttributeNS(null, "stroke", "black");
+    return l
+  }
+
+  function childEllipse(cx, cy, rx, ry) {
+    let e = document.createElementNS(svgns, "ellipse");
+    e.setAttributeNS(null, "cx", cx);
+    e.setAttributeNS(null, "cy", cy);
+    e.setAttributeNS(null, "rx", rx);
+    e.setAttributeNS(null, "ry", ry);
+    e.setAttributeNS(null, "fill", "none");
+    e.setAttributeNS(null, "stroke", "black");
+    return e;
   }
 
   // Set up our event listener to run the startup process
