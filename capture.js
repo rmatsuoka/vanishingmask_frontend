@@ -21,6 +21,7 @@
   var startbutton = null;
   var vanishbutton = null;
   var guideline = null;
+  var magicmirror = null;
 
   function startup() {
     video = document.getElementById('video');
@@ -30,6 +31,7 @@
     startbutton = document.getElementById('startbutton');
     vanishbutton = document.getElementById('vanishbutton');
     guideline = document.getElementById("videoguideline");
+    magicmirror = document.getElementById("magicmirror")
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: false })
       .then(function (stream) {
@@ -53,9 +55,15 @@
 
         video.setAttribute('width', width);
         video.setAttribute('height', height);
+        photo.setAttribute('width', width);
+        photo.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
         streaming = true;
+
+        drawGuideline(width, height);
+        magicmirror.setAttribute('width', width);
+        magicmirror.setAttribute('height', height);
       }
     }, false);
 
@@ -69,7 +77,7 @@
       ev.preventDefault();
     }, false);
 
-    drawGuideline(320, 240);
+
 
     clearbox(photo);
     clearbox(result);

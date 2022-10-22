@@ -1,22 +1,23 @@
 #video {
   border: 1px solid black;
   box-shadow: 2px 2px 3px black;
-  width: 320px;
-  height: 240px;
+  transform: scale(-1, 1);
+  /* width: 320px;
+  height: 240px; */
 }
 
 #photo {
   border: 1px solid black;
   box-shadow: 2px 2px 3px black;
-  width: 320px;
-  height: 240px;
+  /* width: 320px;
+  height: 240px; */
 }
 
 #result {
   border: 1px solid black;
   box-shadow: 2px 2px 3px black;
-  width: 320px;
-  height: 240px;
+  /* width: 320px;
+  height: 240px; */
 }
 
 #canvas {
@@ -68,6 +69,7 @@
   font-family: "Lucida Grande", "Arial", sans-serif;
   color: rgba(255, 255, 255, 1.0);
 }
+
 .contentarea {
   font-size: 16px;
   font-family: "Lucida Grande", "Arial", sans-serif;
@@ -75,6 +77,12 @@
 }
 
 #videoguideline {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#magicmirror {
   position: absolute;
   top: 0px;
   left: 0px;
