@@ -53,6 +53,9 @@
           height = width / (4 / 3);
         }
 
+        height *= 2;
+        width *= 2;
+
         video.setAttribute('width', width);
         video.setAttribute('height', height);
         photo.setAttribute('width', width);
